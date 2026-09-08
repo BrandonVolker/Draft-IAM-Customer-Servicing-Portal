@@ -261,6 +261,7 @@ The following API called *cicero-portal-api* is configured with four routes, eac
 The following Python code snippet on *cicero-privileged-lambda* is responsible for writing unmask events to CloudWatch logs.
 <img width="1260" height="312" alt="logging snippet" src="https://github.com/user-attachments/assets/ab09aeed-1a35-4fb1-85ab-ff40846654e6" />
 
+The timestamp, agent UUID, customer ID, agent user group, the ticket ID the agent supplied in the form, and the fields revealed to the agent are visible.
 <img width="1347" height="766" alt="cloudwatch" src="https://github.com/user-attachments/assets/7e63c138-6764-4424-81d6-ce003cc94567" />
 
 
