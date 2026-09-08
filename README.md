@@ -67,6 +67,8 @@ The agent follows the same log-in process described above using their company-is
 
 ## Architecture Diagram ##
 The following diagram depicts the application and infrastructure components on which this lab is built.
+<img width="1336" height="1002" alt="arch diagram" src="https://github.com/user-attachments/assets/4a494d84-c551-41d2-9ec4-e108172dc8cd" />
+
 
 ## Prerequisite Configuration ##
 The following infrastructure components were configured and deployed to the Diversey Bank AWS environment to support this lab.
@@ -80,7 +82,7 @@ The following infrastructure components were configured and deployed to the Dive
 |------------|--------------|---------------|-------------|
 | us-east-1a | private-app-1a  | 10.0.0.0/24 | cicero-search-lambda, cicero-restricted-lambda, cicero-privileged-lambda, kms-endpoint, sts-endpoint |
 | us-east-1a | private-db-1a | 10.0.2.0/24 | customer-account-db  |
-| us-east-1b | private-app-1b  | 10.0.1.0/24 | cicero-search-lambda, cicero-restricted-lambda, cicero-privileged-lambda, kms-endpoint, sts-endpoint, cognito-endpoint |
+| us-east-1b | private-app-1b  | 10.0.1.0/24 | cicero-search-lambda, cicero-restricted-lambda, cicero-privileged-lambda, kms-endpoint, sts-endpoint |
 | us-east-1b | private-db-1b | 10.0.3.0/24 | customer-account-db |
 
 ### CloudFront Distribution ###
@@ -255,9 +257,14 @@ The following API called *cicero-portal-api* is configured with four routes, eac
 | POST | /customers/{id}/request-access  | cicero-grant-access-lambda |
 | GET | /customers/search | cicero-search-lambda |
 
+### Logging ###
+The following Python code snippet on *cicero-privileged-lambda* is responsible for writing unmask events to CloudWatch logs.
+<img width="1260" height="312" alt="logging snippet" src="https://github.com/user-attachments/assets/ab09aeed-1a35-4fb1-85ab-ff40846654e6" />
 
-**The Principle of Least Privilege:** is a computer security concept and practice that gives users limited access rights based on the tasks necessary to their job.
-**Just-in-time (JIT) access:** is a dynamic, on-demand approach to access control that grants human and non-human identities permissions to an application or system only when they need them to perform a specific, necessary task and only for the minimal amount of time necessary. 
+<img width="3438" height="766" alt="cloudwatch" src="https://github.com/user-attachments/assets/298df3b8-1b57-4022-aaee-80cd3de7361c" />
+
+### Ideal Enhancements ###
+
 
 
 ## References ##
