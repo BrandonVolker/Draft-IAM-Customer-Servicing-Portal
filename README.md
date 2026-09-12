@@ -246,8 +246,10 @@ The following IAM policies are attached to the respective IAM roles (assumed by 
 
 **cicero-decrypt-full-role**
 <img width="776" height="390" alt="cicero-decrypt-full-rolePolicy" src="https://github.com/user-attachments/assets/5a4cf143-01a8-4017-b3b8-9a4f9c9df482" />
+
 **cicero-decrypt-identity-role**
 <img width="826" height="318" alt="cicero-decrypt-identity-rolePolicy" src="https://github.com/user-attachments/assets/17709fb8-a2c9-4b60-86e9-6cf439c920df" />
+
 **cicero-decrypt-financial-role**
 <img width="836" height="320" alt="cicero-decrypt-financial-rolePolicy" src="https://github.com/user-attachments/assets/3ed0d2c3-23f6-463a-86b6-830bb5682335" />
 
