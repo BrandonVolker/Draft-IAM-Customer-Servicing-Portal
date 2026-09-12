@@ -1,13 +1,25 @@
 # Draft-IAM-Customer-Servicing-Portal
 
 ## Table of Contents ##
+- [Agent Experience Walkthrough](#agent-experience-walkthrough)
+- [Prerequisite Configuration](#prerequisite-configuration)
+- [RBAC](#role-based-access-control-rbac)
+- [IAM Policy](#aws-iam-policies)
+- [Ideal Enhancements](#ideal-enhancements)
+- [Conclusion](#conclusion)
 
 ## Overview ##
 
 Diversey Bank is a fictional financial institution headquartered in Chicago, Illinois. Diversey Bank offers a variety of consumer banking solutions to the Midwest region. This lab has built an internal customer-servicing application called Cicero, which is used by customer support agents to service customer accounts. The AWS Free Tier was leveraged for the deployment of services when available. Portions of the application, mainly the front-end, have been "vibe coded" to quickly mock the website so that more time can be allotted to the core intent. This lab will not deep-dive into the security configuration of the infrastructure components as that is out-of-scope. If that is desired, however, check out [AWS-Security-Build](https://github.com/BrandonVolker/AWS-Security-Build).
 
 ## Lab Goal ##
-This lab seeks to demonstrate a basic competency of the Identity and Access Management (IAM) best-practices that may be implemented to securely grant user access to a web application that contains sensitive customer data, such as the Principle of Least Privilege and Just-in-time (JIT) access. These concepts will be explored in further detail below.
+This lab seeks to demonstrate a basic competency of the Identity and Access Management (IAM) best-practices that may be implemented to securely grant user access to a web application that contains sensitive customer data, such as role-based access control (RBAC), the Principle of Least Privilege and Just-in-time (JIT) access. A successful outcome is one in which an agent can access only the data that is authorized for their role, that access is denied to agents outside that role, and that access is time-bound to the minimum duration necessary for the business use-case.
+
+**RBAC** is a mechanism where you allow users to access certain resources based on permissions defined for the roles they are assigned to. 
+
+**Principle of Least Privilege** is a computer security concept and practice that gives users limited access rights based on the tasks necessary to their job. 
+
+**JIT** is a dynamic, on-demand approach to access control that grants human and non-human identities permissions to an application or system only when they need them to perform a specific, necessary task and only for the minimal amount of time necessary.
 
 ## Agent Experience Walkthrough ##
 
@@ -25,11 +37,13 @@ The agent is given a choice of logging in with their security key or password (w
 
 <img width="3440" height="1202" alt="touch" src="https://github.com/user-attachments/assets/7d078ec8-78ad-403e-8d98-df0bea2804ff" />
 
+
 The following is provided to demonstrate the password + TOTP alternative. The agent has previously registered with Google Authenticator.
 
 <img width="3440" height="1332" alt="password" src="https://github.com/user-attachments/assets/0f3053d6-5459-4087-97eb-9cd92fd42111" />
 
 <img width="3440" height="1360" alt="otp" src="https://github.com/user-attachments/assets/62460e10-a4f1-4fb6-876d-76adb34cb6f6" />
+
 
 
 The agent has been authenticated to Cicero.
@@ -106,6 +120,7 @@ The S3 bucket is called *diverseybank-internal-static-s3* and contains the follo
 | index.html | Contains the structural container of the app with static text/buttons  |
 | styles.css | Contains the application's visuals (colors, fonts, spacing) |
 
+
 Public access to the bucket is blocked and the bucket policy is allowing only connections from the CloudFront distribution.
 <img width="1628" height="652" alt="bucket policy" src="https://github.com/user-attachments/assets/bf0ab860-24b1-43e4-bc36-00828d3b95bc" />
 
@@ -115,8 +130,10 @@ A MySQL database called *customer-account-db* contains the customer account data
 
 <img width="2354" height="86" alt="rds" src="https://github.com/user-attachments/assets/fad2a5bd-ddf3-4b22-8c08-bd64e5ace67e" />
 
+
 Table **customer-info** contains the identity information related to the Bank's customers. Date of Birth and Tax ID are encrypted at the field-level as they are deemed sensitive data elements.
 <img width="3104" height="968" alt="customer_info" src="https://github.com/user-attachments/assets/d2b0fa09-e073-4b90-a067-0b93956461c3" />
+
 
 Table **account-info** contains the financial information held by the Bank's customers. Account number is encrypted at the field-level as it is deemed a sensitive data element.
 <img width="1966" height="968" alt="account_info" src="https://github.com/user-attachments/assets/c727fbde-2ac2-4ff9-b1a3-56fdf28e988f" />
@@ -137,6 +154,7 @@ The following DynamoDB table is called *cicero-jit-grants-table* and is used to 
 
 <img width="2892" height="118" alt="grants table" src="https://github.com/user-attachments/assets/e80739ca-b125-40cf-a218-2e8579b31300" />
 
+
 The following is a look at the grants stored within the table after two agents have just requested access to view those sensitive fields. Grants have an assigned TTL of (5) minutes.
 <img width="2988" height="300" alt="grants" src="https://github.com/user-attachments/assets/3b632c89-6519-4fd2-b0b7-5b009dfa7411" />
 
@@ -145,6 +163,7 @@ The following is a look at the grants stored within the table after two agents h
 The following four Lambda functions execute the back-end infrastructure calls (via Python scripts attached to the Functions) needed to render data within Cicero.
 
 <img width="1600" height="388" alt="lambda functions" src="https://github.com/user-attachments/assets/d08e42c1-f517-4ff9-a305-f3e6c05ebb42" />
+
 
 | Function Name | Description |
 |------------|--------------|
@@ -165,6 +184,7 @@ A User Pool called *cicero-user-pool* contains the four agent identities that ar
 
 <img width="2066" height="274" alt="groups" src="https://github.com/user-attachments/assets/bd3ca8fd-d851-4540-baad-95c73e11eac6" />
 
+
 Agents have been assigned to the following groups.
 
 | Agent Name| Group | Privilege |
@@ -173,6 +193,7 @@ Agents have been assigned to the following groups.
 | Max Mayfield | cicero-identity-access | Can view DOB and Tax ID (SSN/ITIN) |
 | Dustin Henderson| cicero-financial-access  | Can view account number |
 | Jim Hopper | cicero-full-access | Can view DOB, Tax ID (SSN/ITIN), account number |
+
 
 All agents have been enrolled in passwordless passkey authentication. Password and Time-based One-Time Password (TOTP) via authenticator app is supported as a fall-back option. Note: Cognito requires the password authenticator to be enabled, otherwise, it would be disabled for this lab. The session will also implement a 15-minute idle timeout and an 8-hour absolute timeout, after which time, the agent will be required to re authenticate, regardless of activity .
 <img width="1974" height="506" alt="sign-in methods" src="https://github.com/user-attachments/assets/ac0dbb4a-096b-4df7-b222-fbbbb5dfd7b3" />
@@ -232,16 +253,24 @@ The following IAM policies are attached to the respective IAM roles (assumed by 
 
 The following IAM policies are attached to the respective IAM execution roles used by Lambda.
 
+
 **cicero-search-lambda-role**
+
 <img width="962" height="628" alt="cicero-search-lambda-policy" src="https://github.com/user-attachments/assets/659ef1fc-694e-4c06-93fb-4ce774d68afd" />
 
+
 **cicero-restricted-lambda-role**
+
 <img width="952" height="622" alt="cicero-restricted-lambda-policy" src="https://github.com/user-attachments/assets/1f20ede4-bfeb-4b30-a377-dafa6cf30f5c" />
 
+
 **cicero-grant-access-lambda-role**
+
 <img width="954" height="470" alt="cicero-grant-access-lambda-policy" src="https://github.com/user-attachments/assets/40c7096b-4c41-46e4-a394-764625c2f12b" />
 
+
 **cicero-privileged-lambda-role**
+
 <img width="990" height="671" alt="cicero-privileged-lambda-policy-1" src="https://github.com/user-attachments/assets/ed44bee1-f2db-4fec-8821-d6a9b170ae60" />
 <img width="952" height="308" alt="cicero-privileged-lambda-policy-2" src="https://github.com/user-attachments/assets/53a1ba72-81da-437d-9623-1389250d09ec" />
 
@@ -261,12 +290,18 @@ The following API called *cicero-portal-api* is configured with four routes, eac
 The following Python code snippet on *cicero-privileged-lambda* is responsible for writing unmask events to CloudWatch logs.
 <img width="1260" height="312" alt="logging snippet" src="https://github.com/user-attachments/assets/ab09aeed-1a35-4fb1-85ab-ff40846654e6" />
 
+
 The timestamp, agent UUID, customer ID, agent user group, the ticket ID the agent supplied in the form, and the fields revealed to the agent are visible.
 <img width="1347" height="766" alt="cloudwatch" src="https://github.com/user-attachments/assets/7e63c138-6764-4424-81d6-ce003cc94567" />
 
-
 ### Ideal Enhancements ###
+The following are recognized as ideal enhancements to increase the overall security posture of Cicero, but are considered out-of-scope for this IAM lab.
 
+**Validation of agent-submitted ticket** - The key to JIT access is sufficient validation of the agent-submitted ticket (e.g. CALL# ticket is validated against the system of record for active phone calls).
+**Suspicious activity monitoring** - All user sessions would be monitored for anomalous activity such as multiple requests for sensitive information within a certain timeframe (e.g. 6 requests within a 10 minute period would trigger an alert and/or account lockout).
+
+## Conclusion ##
+This lab has implemented a few critical IAM access control best-practices such as **role-based access control (RBAC)**, **the principle of least privilege**, and **just-in-time (JIT) access**. Agents are assigned to specific Cognito user groups corresponding to their role and each group's permissions are scoped such that agents can view only the customer information required for their role for a limited time duration after they have provided proper justification. These controls work together to reduce the blast radius of an account takeover attack.
 
 
 ## References ##
