@@ -244,6 +244,7 @@ The following is the invocation of the function above, once per sensitive data f
 ### IAM Policy ###
 The following IAM policies are attached to the respective IAM roles (assumed by the Lambda functions) and represents the enforcement point for the decrypt operation.
 
+
 **cicero-decrypt-full-role**
 <img width="776" height="390" alt="cicero-decrypt-full-rolePolicy" src="https://github.com/user-attachments/assets/5a4cf143-01a8-4017-b3b8-9a4f9c9df482" />
 
