@@ -114,11 +114,13 @@ The S3 bucket is called *diverseybank-internal-static-s3* and contains the follo
 <img width="1636" height="434" alt="s3-objects" src="https://github.com/user-attachments/assets/6ba87638-71a2-4acf-9077-4121fa7a5ffb" />
 
 
+
 | File Name | Description |
 |------------|--------------|
 | app.js | Contains the application's logic (signing in/out, calls to the API, rendering search results) |
 | index.html | Contains the structural container of the app with static text/buttons  |
 | styles.css | Contains the application's visuals (colors, fonts, spacing) |
+
 
 
 Public access to the bucket is blocked and the bucket policy is allowing only connections from the CloudFront distribution.
