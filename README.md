@@ -318,6 +318,8 @@ The following are recognized as ideal enhancements to increase the overall secur
 This lab has implemented a few critical IAM access control best-practices such as **role-based access control (RBAC)**, **the principle of least privilege**, and **just-in-time (JIT) access**. Agents are assigned to specific Cognito user groups corresponding to their role and each group's permissions are scoped such that agents can view only the customer information required for their role for a limited time duration after they have provided proper justification. These controls work together to reduce the blast radius of an account takeover attack.
 
 
+
 ## References ##
+https://www.crowdstrike.com/en-us/cybersecurity-101/identity-security/role-based-access-control/ 
 https://www.crowdstrike.com/en-us/cybersecurity-101/identity-security/just-in-time-access/
 https://www.crowdstrike.com/en-us/cybersecurity-101/identity-security/principle-of-least-privilege-polp/
