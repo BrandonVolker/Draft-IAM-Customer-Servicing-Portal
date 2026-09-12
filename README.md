@@ -1,4 +1,4 @@
-# Draft-IAM-Customer-Servicing-Portal
+# IAM-Customer-Servicing-Portal
 
 ## Table of Contents ##
 - [Agent Experience Walkthrough](#agent-experience-walkthrough)
