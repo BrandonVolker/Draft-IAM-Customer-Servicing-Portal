@@ -258,10 +258,12 @@ The following IAM policies are attached to the respective IAM roles (assumed by 
 The following IAM policies are attached to the respective IAM execution roles used by Lambda.
 
 
+
 **cicero-search-lambda-role**
 
 
 <img width="962" height="628" alt="cicero-search-lambda-policy" src="https://github.com/user-attachments/assets/659ef1fc-694e-4c06-93fb-4ce774d68afd" />
+
 
 
 **cicero-restricted-lambda-role**
@@ -270,17 +272,20 @@ The following IAM policies are attached to the respective IAM execution roles us
 <img width="952" height="622" alt="cicero-restricted-lambda-policy" src="https://github.com/user-attachments/assets/1f20ede4-bfeb-4b30-a377-dafa6cf30f5c" />
 
 
+
 **cicero-grant-access-lambda-role**
 
-
 <img width="954" height="470" alt="cicero-grant-access-lambda-policy" src="https://github.com/user-attachments/assets/40c7096b-4c41-46e4-a394-764625c2f12b" />
+
 
 
 **cicero-privileged-lambda-role**
 
 
+
 <img width="990" height="671" alt="cicero-privileged-lambda-policy-1" src="https://github.com/user-attachments/assets/ed44bee1-f2db-4fec-8821-d6a9b170ae60" />
 <img width="952" height="308" alt="cicero-privileged-lambda-policy-2" src="https://github.com/user-attachments/assets/53a1ba72-81da-437d-9623-1389250d09ec" />
+
 
 
 ### API Gateway ###
