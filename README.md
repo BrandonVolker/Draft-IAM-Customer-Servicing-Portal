@@ -311,6 +311,7 @@ The timestamp, agent UUID, customer ID, agent user group, the ticket ID the agen
 The following are recognized as ideal enhancements to increase the overall security posture of Cicero, but are considered out-of-scope for this IAM lab.
 
 **Validation of agent-submitted ticket** - The key to JIT access is sufficient validation of the agent-submitted ticket (e.g. CALL# ticket is validated against the system of record for active phone calls).
+
 **Suspicious activity monitoring** - All user sessions would be monitored for anomalous activity such as multiple requests for sensitive information within a certain timeframe (e.g. 6 requests within a 10 minute period would trigger an alert and/or account lockout).
 
 ## Conclusion ##
