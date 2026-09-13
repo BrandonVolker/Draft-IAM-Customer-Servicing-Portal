@@ -228,7 +228,7 @@ The following diagram depicts the OAuth 2.0 flow for agent authorization which l
 ### OAuth Flow (Enhanced) ###
 After learning more about OAuth best-practices with SPAs, it was discovered that the Claude-generated SPA did not utilize Proof Key for Code Exchange (PKCE), which is a recommendation for public clients such as this. PKCE now requires the SPA to generate a code_verifier and pass it to Cognito (alongside the authorization code) before any tokens are issued. This step binds the token exchange to whoever initiated the original flow, ensuring that a bad actor who intercepts the authorization code cannot redeem it for tokens. The following depicts the enhanced OAuth/OIDC flow.
 
-<img width="1454" height="976" alt="oauth flow" src="https://github.com/user-attachments/assets/01db6fd3-9f12-495d-a298-2b87c7d89f90" />
+<img width="1448" height="984" alt="oauth flow" src="https://github.com/user-attachments/assets/5d2e7efb-c28b-4213-96e1-248055773cba" />
 
 
 
