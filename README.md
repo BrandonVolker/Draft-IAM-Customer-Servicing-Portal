@@ -188,7 +188,7 @@ A User Pool called *cicero-user-pool* contains the four agent identities that ar
 <img width="2066" height="274" alt="groups" src="https://github.com/user-attachments/assets/bd3ca8fd-d851-4540-baad-95c73e11eac6" />
 
 
-Agents have been assigned to the following groups.
+Agents have been assigned to the following groups based on their role at the company.
 
 | Agent Name| Group | Privilege |
 |------------|--------------| ---|
