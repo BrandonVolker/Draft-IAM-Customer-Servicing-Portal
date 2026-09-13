@@ -4,7 +4,7 @@
 - [Agent Experience Walkthrough](#agent-experience-walkthrough)
 - [Prerequisite Configuration](#prerequisite-configuration)
 - [RBAC](#role-based-access-control-rbac)
-- [OAuth Flow](#OAuth-2.0-Flow-Original)
+- [OAuth Flow](#oauth-2.0-flow-original)
 - [IAM Policy](#aws-iam-policies)
 - [Ideal Enhancements](#ideal-enhancements)
 - [Conclusion](#conclusion)
