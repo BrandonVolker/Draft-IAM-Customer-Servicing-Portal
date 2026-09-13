@@ -339,5 +339,7 @@ This lab has implemented a few critical IAM access control best-practices such a
 
 ## References ##
 https://www.crowdstrike.com/en-us/cybersecurity-101/identity-security/role-based-access-control/ 
+
 https://www.crowdstrike.com/en-us/cybersecurity-101/identity-security/just-in-time-access/
+
 https://www.crowdstrike.com/en-us/cybersecurity-101/identity-security/principle-of-least-privilege-polp/
