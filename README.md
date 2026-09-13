@@ -4,6 +4,7 @@
 - [Agent Experience Walkthrough](#agent-experience-walkthrough)
 - [Prerequisite Configuration](#prerequisite-configuration)
 - [RBAC](#role-based-access-control-rbac)
+- [OAuth Flow](#OAuth-2.0-Flow)
 - [IAM Policy](#aws-iam-policies)
 - [Ideal Enhancements](#ideal-enhancements)
 - [Conclusion](#conclusion)
@@ -216,6 +217,20 @@ After an agent authenticates, Cognito delivers a JSON Web Token (JWT) to the age
 
 **Jim Hopper JWT**
 <img width="1330" height="784" alt="hopper-jwt" src="https://github.com/user-attachments/assets/6e6ef154-7a17-48dc-bc53-e1592c6168f0" />
+
+#### OAuth 2.0 Flow (Original) ####
+The following diagram depicts the OAuth 2.0 flow for agent authorization which leverages OIDC for authentication.
+
+<img width="576" height="512" alt="OAuth original" src="https://github.com/user-attachments/assets/f139bda0-bec4-41bc-9282-9f8e19f59e63" />
+
+
+#### OAuth 2.0 Flow (Enhanced) ####
+After learning more about OAuth best-practices with SPAs, it was discovered that the Claude-generated SPA did not utilize Proof Key for Code Exchange (PKCE), which is a recommendation for public clients such as this. PKCE now requires the SPA to generate a code_verifier and pass it to Cognito (alongside the authorization code) before any tokens are issued. This step binds the token exchange to whoever initiated the original flow, ensuring that a bad actor who intercepts the authorization code cannot redeem it for tokens. The following depicts the enhanced OAuth/OIDC flow.
+
+<img width="1124" height="766" alt="oauth flow" src="https://github.com/user-attachments/assets/44ce5117-5303-45a2-8a2a-cf3dc8170a01" />
+
+
+
 
 ### AWS IAM Policies ###
 Seven (7) IAM roles have been created to support this lab. The following is a break-down of each.
